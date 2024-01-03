@@ -62,12 +62,12 @@ public class DownloadController(
             await file.CopyToAsync(fileStream);
             fileStream.Close();
         }
-        cachingSingleton.CachingMap.Add(downloadRequest.UniqueKey, new CacheObject()
+        cachingSingleton.CachingMap.TryAdd(downloadRequest.UniqueKey, new CacheObject()
         {
             Md5Hash = downloadRequest.Md5Hash,
             Path = newPath
         });
-        var stream = System.IO.File.OpenRead(newPath);
-        return new FileStreamResult(stream, "application/octet-stream");
+        file.Seek(0, SeekOrigin.Begin);
+        return new FileStreamResult(file, "application/octet-stream");
     }
 }
