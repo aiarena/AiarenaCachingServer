@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AiarenaCachingServer;
+using AiarenaCachingServer.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AiArenaCachingServer.Controllers;
 
@@ -23,12 +25,14 @@ public class DownloadController(
         if (cachingSingleton.CachingMap.TryGetValue(downloadRequest.UniqueKey, out CacheObject? cacheObject) &&
             cacheObject.Md5Hash == downloadRequest.Md5Hash && Path.Exists(cacheObject.Path))
         {
-            logger.LogInformation("Cache exists for {Md5Hash}", downloadRequest.Md5Hash);
+            logger.LogInformation("Cache exists for {UniqueKey}, {Md5Hash}", downloadRequest.UniqueKey,
+                downloadRequest.Md5Hash);
             var fileStream = System.IO.File.OpenRead(cacheObject.Path);
             return new FileStreamResult(fileStream, "application/octet-stream");
         }
 
-        logger.LogInformation("Cache does not exist for {Md5Hash}", downloadRequest.Md5Hash);
+        logger.LogInformation("Cache does not exist for {UniqueKey}, {Md5Hash}", downloadRequest.UniqueKey,
+            downloadRequest.Md5Hash);
         if (cacheObject != null && Path.Exists(cacheObject.Path))
         {
             System.IO.File.Delete(cacheObject.Path);

@@ -1,4 +1,4 @@
-using AiArenaCachingServer.Controllers;
+using AiarenaCachingServer;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 

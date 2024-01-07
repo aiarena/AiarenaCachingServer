@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AiArenaCachingServer.Controllers;
+namespace AiarenaCachingServer.Models;
 
 public class DownloadRequest
 {

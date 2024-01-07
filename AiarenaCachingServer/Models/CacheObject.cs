@@ -1,4 +1,4 @@
-namespace AiArenaCachingServer.Controllers;
+namespace AiarenaCachingServer.Models;
 
 public class CacheObject
 {

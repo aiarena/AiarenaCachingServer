@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
+using AiarenaCachingServer.Models;
 
-namespace AiArenaCachingServer.Controllers;
+namespace AiarenaCachingServer;
 
 public class CachingSingleton
 {
