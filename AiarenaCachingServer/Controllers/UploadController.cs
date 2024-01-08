@@ -13,6 +13,7 @@ public class UploadController(
     [HttpPost]
     [Route("upload")]
     [RequestSizeLimit(long.MaxValue)]
+    [RequestFormLimits(ValueLengthLimit = int.MaxValue, MultipartBodyLengthLimit = int.MaxValue)]
     public async Task<IActionResult> Upload(IFormFile file, string uniqueKey)
     {
         logger.LogInformation("Upload request received for {UniqueKey}", uniqueKey);
